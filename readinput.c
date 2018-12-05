@@ -25,7 +25,11 @@
 void readinput(char *jobnamec, char **inpcp, ITG *nline, ITG *nset,
 	       ITG *ipoinp, ITG **inpp, ITG **ipoinpcp, ITG *ithermal,
                ITG *nuel){
-
+// jobname :: input file name.
+// inpcp   :: inpc, whole input variables are saved.
+// nline   :: total number of rows in input file, not include blank and comment.
+// nset    :: total number of sets.
+// ipoinp  :: 
   /*   reads and stores the input deck in inpcp; determines the
        number of sets  */
 

@@ -24,7 +24,8 @@ extern int log_realloc;
 /*
  Diehl program
 */
-
+// #define RENEW(a,b,c) a=(b *)u_realloc((b *)(a),(c)*sizeof(b),__FILE__,__LINE__,#a)
+// RENEW(kon,ITG,nkon);
 void *u_realloc(void* ptr,size_t size,const char *file,const int line, const char* ptr_name){
 
     /* reallocating a field with pointer ptr to size bytes */

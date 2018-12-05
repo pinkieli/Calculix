@@ -158,16 +158,16 @@ kode=0;
  isolver=3;
 #endif
 
- NNEW(ipoinp,ITG,2*nentries);
+NNEW(ipoinp,ITG,2*nentries);
 
 /* conservative estimate of the fields to be allocated */
 
 readinput(jobnamec,&inpc,&nline,&nset_,ipoinp,&inp,&ipoinpc,ithermal,&nuel_);
 
 NNEW(set,char,81*nset_);
-NNEW(meminset,ITG,nset_);
+NNEW(meminset,ITG,nset_);// nset: number of sets (including surfaces).
 NNEW(rmeminset,ITG,nset_);
-NNEW(iuel,ITG,4*nuel_);
+NNEW(iuel,ITG,4*nuel_); //nuel: number of different user elements types.
 
 FORTRAN(allocation,(&nload_,&nforc_,&nboun_,&nk_,&ne_,&nmpc_,&nset_,&nalset_,
    &nmat_,&ntmat_,&npmat_,&norien_,&nam_,&nprint_,mi,&ntrans_,

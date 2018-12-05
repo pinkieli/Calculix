@@ -25,7 +25,8 @@ int log_realloc=-1;
 /*
  Diehl program
 */
-
+//   #define NNEW(a,b,c) a=(b *)u_calloc((c),sizeof(b),__FILE__,__LINE__,#a)
+//    NNEW(set,char,81*nset_);
 void *u_calloc(size_t num,size_t size,const char *file,const int line, const char* ptr_name){
 
     /* allocating num elements of size bytes and initializing them to zero */
@@ -38,7 +39,7 @@ void *u_calloc(size_t num,size_t size,const char *file,const int line, const cha
     return(a);
   }
       
-  a=calloc(num,size);
+  a=calloc(num,size);//
   if(a==NULL){
     printf("*ERROR in u_calloc: error allocating memory\n");
     printf("variable=%s, file=%s, line=%d, num=%ld, size=%ld\n",ptr_name,file,line,num,size);
@@ -51,7 +52,7 @@ void *u_calloc(size_t num,size_t size,const char *file,const int line, const cha
     if(log_realloc==-1) {
       log_realloc=0;
       env=getenv("CCX_LOG_ALLOC");
-      if(env) {log_realloc=atoi(env);}
+      if(env) {log_realloc=atoi(env);}// converted string *env into integer,i.e. atoi(true)=1 .by pinkie.
     }      
     if(log_realloc==1) {
 	printf("ALLOCATION of variable %s, file %s, line=%d, num=%ld, size=%ld, address= %ld\n",ptr_name,file,line,num,size,(long int)a);
