@@ -87,7 +87,8 @@
       if(ithermal(2).ne.2) mi(2)=3
 !
 !     initialisation of ipoinp
-!
+!     find position of the first nonzeros value in ipoinp(1,*) and save
+!     ipol and iline, its value is inl.
       do i=1,nentries
          if(ipoinp(1,i).ne.0) then
             ipol=i
@@ -99,8 +100,8 @@
 !
       istat=0
 !
-      nset=0
-      maxrmeminset=0
+      nset=0   ! number of sets (including surfaces.)
+      maxrmeminset=0 
       necper=0
       necpsr=0
       necaxr=0
@@ -113,13 +114,13 @@
       four=4
 !
       call getnewline(inpc,textpart,istat,n,key,iline,ipol,inl,
-     &     ipoinp,inp,ipoinpc)
+     &     ipoinp,inp,ipoinpc)   ! n:number of parameters; key=1: keywords;istat:
       loop: do
          if(istat.lt.0) then
             exit
          endif
 !
-         if(textpart(1)(1:10).eq.'*AMPLITUDE') then
+         if(textpart(1)(1:10).eq.'*AMPLITUDE') then!====================
             nam=nam+1
             do
                call getnewline(inpc,textpart,istat,n,key,iline,ipol,inl,
@@ -127,7 +128,7 @@
                if((istat.lt.0).or.(key.eq.1)) exit
                namtot=namtot+4
             enddo
-         elseif(textpart(1)(1:19).eq.'*BEAMGENERALSECTION') then
+         elseif(textpart(1)(1:19).eq.'*BEAMGENERALSECTION') then!=======
             mi(3)=max(mi(3),2)
             do
                call getnewline(inpc,textpart,istat,n,key,iline,ipol,inl,
@@ -138,7 +139,7 @@ c                  nprop=nprop-8
                endif
                nprop=nprop+8
             enddo
-         elseif(textpart(1)(1:12).eq.'*BEAMSECTION') then
+         elseif(textpart(1)(1:12).eq.'*BEAMSECTION') then!==============
             mi(3)=max(mi(3),2)
             beamgeneralsection=.false.
             do i=2,n
@@ -163,7 +164,7 @@ c                     nprop=nprop-8
                call getnewline(inpc,textpart,istat,n,key,iline,ipol,
      &           inl,ipoinp,inp,ipoinpc)
             endif
-         elseif(textpart(1)(1:10).eq.'*BOUNDARYF') then
+         elseif(textpart(1)(1:10).eq.'*BOUNDARYF') then!================
             nam=nam+1
             namtot=namtot+1
             do
@@ -1598,7 +1599,7 @@ c!
      &           (textpart(1)(1:9).ne.'*NODEFILE').and.
      &           (textpart(1)(1:11).ne.'*NODEOUTPUT')) then
             inoset=0
-            loop3: do i=2,n
+            loop3: do i=2,n!--------------------------------------------
                if(textpart(i)(1:5).eq.'NSET=') then
                   noset=textpart(i)(6:85)
                   noset(81:81)=' '
@@ -1613,13 +1614,13 @@ c!
                      set(nset)=noset
                   endif
                endif
-            enddo loop3
+            enddo loop3!------------------------------------------------
 !
-            do
+            do 
                call getnewline(inpc,textpart,istat,n,key,iline,ipol,inl,
      &              ipoinp,inp,ipoinpc)
                if((istat.lt.0).or.(key.eq.1)) exit
-               read(textpart(1)(1:10),'(i10)',iostat=istat) i
+               read(textpart(1)(1:10),'(i10)',iostat=istat) i ! coverted into integer.
                if(istat.gt.0) then
                   call inputerror(inpc,ipoinpc,iline,
      &            "*NODE or *NODE PRINT or *NODE FILE or *NODE OUTPUT%")

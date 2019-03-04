@@ -34,7 +34,7 @@
       j=0
       do i=1,1320
          ctext=text(i:i)
-         if(ctext.ne.',') then
+         if(ctext.ne.',') then ! =======================================
             if(ctext.eq.' ') then
 c               cycle
                exit
@@ -44,14 +44,15 @@ c     &             ctext=char(ichar(ctext)-32)
             endif
             j=j+1
             if(j.le.132) textpart(n)(j:j)=ctext
-         else
+         else !=========================================================
             do k=j+1,132
                textpart(n)(k:k)=' '
             enddo
             j=0
             n=n+1
-            if(n.gt.16) then
+            if(n.gt.16) then !++++++++++++++++++++++++++++++++++++++++++
                ierror=0
+C              /////////////////////////////////////////////////////////
                do k=i+1,1320
                   if(text(k:k).eq.',') cycle
                   if(text(k:k).eq.' ') then
@@ -68,9 +69,10 @@ c     &             ctext=char(ichar(ctext)-32)
                   endif
                   ierror=1
                enddo
+C              \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                exit
             endif
-         endif
+         endif !========================================================
       enddo
       if(j.eq.0) then
          n=n-1

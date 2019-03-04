@@ -70,7 +70,7 @@
          key=1
       endif
 !
-      call splitline(text,textpart,n)
+      call splitline(text,textpart,n) ! divided text into n parts, and saveed in textpart.
 !
       return
       end

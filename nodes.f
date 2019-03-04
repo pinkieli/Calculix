@@ -45,7 +45,7 @@
 !
 !     checking for set definition
 !      
-      loop: do i=2,n
+      loop: do i=2,n !==================================================
          if(textpart(i)(1:5).eq.'NSET=') then
             noset=textpart(i)(6:85)
             if(textpart(i)(86:86).ne.' ') then
@@ -114,9 +114,9 @@
             call inputwarning(inpc,ipoinpc,iline,
      &"*NODE%")
          endif
-      enddo loop
+      enddo loop !======================================================
 !
-      do
+      do ! start save the node coord in co.
          call getnewline(inpc,textpart,istat,n,key,iline,ipol,inl,
      &        ipoinp,inp,ipoinpc)
          if((istat.lt.0).or.(key.eq.1)) return
